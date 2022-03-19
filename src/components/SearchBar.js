@@ -1,7 +1,5 @@
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 const Search = styled("div")(({ theme }) => ({
@@ -44,15 +42,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   }
 }));
 
-export default function SearchBar({reverseIcon}) {
+export default function SearchBar({reverseIcon , bg}) {
   return (
     
-      <Search sx={{display:'flex',flexDirection: (reverseIcon) ? "row-reverse" : "row"}}>
+      <Search sx={{ backgroundColor:bg , display:'flex',flexDirection: (reverseIcon) ? "row-reverse" : "row"}}>
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>
         <StyledInputBase
-          placeholder="Search Here"
+          placeholder="Search"
           inputProps={{ "aria-label": "search" }}
         />
       </Search>

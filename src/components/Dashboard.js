@@ -23,24 +23,9 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SearchBar from "./SearchBar";
 import CategoryDropDown from "./CategoriesDropdown";
 import AddIcon from '@mui/icons-material/Add';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const drawerWidth = 240;
 
@@ -100,16 +85,21 @@ const mdTheme = createTheme({
 });
 
 function DashboardContent() {
+  const theme = useTheme();
+  const belowSm = useMediaQuery(theme.breakpoints.down('sm'));
+  const aboveMd =  useMediaQuery(theme.breakpoints.up('md'));
+  // if screen size  is >= sm open drawer
   const [open, setOpen] = React.useState(true);
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
-
   return (
+    
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar position="absolute" open={open } >
           <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed
@@ -122,7 +112,7 @@ function DashboardContent() {
               onClick={toggleDrawer}
               sx={{
                 marginRight: "36px",
-                ...(open && { display: "none" }),
+                ...( open && { display: "none" }),
               }}
             >
               <MenuIcon />
@@ -134,7 +124,11 @@ function DashboardContent() {
                 justifyContent: "space-between",
                 width: "100%",
               }}
-            >
+            > 
+              
+              
+              {/* search and category */}
+              
               <Box
                 sx={{
                   display: "flex",
@@ -144,17 +138,24 @@ function DashboardContent() {
                 }}
               >
                 <CategoryDropDown />
-                <SearchBar reverseIcon={true}/>
+                <SearchBar reverseIcon={true} />
+                
               </Box>
+            
 
+               {/* avatar design */}
+               
               <Box sx={{ display: "flex" }}>
                 <Divider
                   orientation="vertical"
                   flexItem
                   sx={{ margin: "5px" }}
                 />
-                <Avatar alt="Remy Sharp" src="https://picsum.photos/200" />
-                <Box
+                <Avatar  alt="Remy Sharp" src="https://picsum.photos/200" />
+
+                {aboveMd &&
+                <>
+                 <Box
                   sx={{
                     display: "flex",
                     alignItems: "align-left",
@@ -181,10 +182,17 @@ function DashboardContent() {
                 <IconButton color="inherit">
                   <ExpandMoreIcon />
                 </IconButton>
+                </>
+                }
               </Box>
+              
+             
+              
+
             </Box>
           </Toolbar>
         </AppBar>
+
         <Drawer variant="permanent" open={open}>
           <Toolbar
             sx={{
@@ -221,10 +229,10 @@ function DashboardContent() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3} xs={12}>
+            <Grid container spacing={3} item xs={12}>
               {/* search and add new */}
 
-              <Grid item xs={12}>
+              <Grid item xs={12} container>
                 <Box
                   sx={{
                     display: "flex",
@@ -232,14 +240,28 @@ function DashboardContent() {
                     width: "100%",
                   }}
                 >
-                  <Box  sx={{backgroundColor :'#f7f8ff',borderColor:'black'}}>
-                    <SearchBar reverseIcon={false} />
-                  </Box>
-                  <Box>
-                  <Button sx={{backgroundColor:'#3f50b5',color:'white'}} variant="contained" endIcon={<AddIcon />}>
-                    Add New
-                 </Button>
-                  </Box>
+                  <Grid container item spacing={2}>
+                    {/* search bar  */}
+                    <Grid item xs={12} sm={12} md={6} lg={4}>
+                    <Box sx={{ backgroundColor: "#f7f8ff" }} >
+                      <SearchBar reverseIcon={false} />
+                    </Box>
+                    </Grid>
+                     
+                     {/* add new */}
+                     <Grid item xs={12} sm={12} md={6} lg={4}>
+                    <Box>
+                      <Button
+                        sx={{ backgroundColor: "#3f50b5", color: "white" }}
+                        variant="contained"
+                        endIcon={<AddIcon />}
+                      >
+                        Add New
+                      </Button>
+                    </Box>
+                    </Grid>
+                  </Grid>
+
                 </Box>
               </Grid>
 

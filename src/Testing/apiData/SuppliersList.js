@@ -1,17 +1,14 @@
 import * as React from "react";
-import Link from "@mui/material/Link";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Title from "./Title";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import PauseIcon from "@mui/icons-material/Pause";
-import Badge from "@mui/material/Badge";
-import { Grid, IconButton, Typography } from "@mui/material";
+import { Box, Grid, IconButton } from "@mui/material";
+import { ArrowDropDown ,CalendarToday} from "@mui/icons-material";
 
 // Generate suppliers data
 function createSupplier(
@@ -53,66 +50,51 @@ const suppliers = [
   createSupplier(7, "supplier name", 1234567, "11/03/2022", 12, 122345678, ""),
 ];
 
-// Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
+
+const cellStyle = {
+    display:'flex',
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between'
 }
 
-const rows = [
-  createData(
-    0,
-    "16 Mar, 2019",
-    "Elvis Presley",
-    "Tupelo, MS",
-    "VISA ⠀•••• 3719",
-    312.44
-  ),
-  createData(
-    1,
-    "16 Mar, 2019",
-    "Paul McCartney",
-    "London, UK",
-    "VISA ⠀•••• 2574",
-    866.99
-  ),
-  createData(
-    2,
-    "16 Mar, 2019",
-    "Tom Scholz",
-    "Boston, MA",
-    "MC ⠀•••• 1253",
-    100.81
-  ),
-  createData(
-    3,
-    "16 Mar, 2019",
-    "Michael Jackson",
-    "Gary, IN",
-    "AMEX ⠀•••• 2000",
-    654.39
-  ),
-  createData(
-    4,
-    "15 Mar, 2019",
-    "Bruce Springsteen",
-    "Long Branch, NJ",
-    "VISA ⠀•••• 5919",
-    212.79
-  ),
-];
-
-export default function Orders() {
+export default function SuppliersList() {
   return (
     <React.Fragment>
       <Grid item xs={12}>
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell>Supplier Name</TableCell>
-              <TableCell>Supplier ID</TableCell>
-              <TableCell>Start Date</TableCell>
-              <TableCell>No.Of Products</TableCell>
-              <TableCell>Tax Number (GST)</TableCell>
+              <TableCell>
+                  <Box sx={cellStyle}>
+                      <Box>Supplier Name</Box>
+                      <Box> <ArrowDropDown /> </Box>
+                  </Box>
+              </TableCell>
+              <TableCell>
+                 <Box sx={cellStyle}>
+                      <Box>Supplier ID</Box>
+                      <Box> <ArrowDropDown /> </Box>
+                  </Box>
+              </TableCell>
+              <TableCell>  
+                 <Box sx={cellStyle}>
+                      <Box>Start Date</Box>
+                      <Box> <CalendarToday sx={{height:15 , width:15}}/> </Box>
+                  </Box>
+              </TableCell>
+              <TableCell>
+                 <Box sx={cellStyle}>
+                      <Box>No.Of Products</Box>
+                      <Box> <ArrowDropDown /> </Box>
+                  </Box>
+              </TableCell>
+              <TableCell>
+              <Box sx={cellStyle}>
+                      <Box>Tax Number (GST)</Box>
+                      <Box> <ArrowDropDown /> </Box>
+                  </Box>
+              </TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -158,9 +140,6 @@ export default function Orders() {
           </TableBody>
         </Table>
       </Grid>
-      {/* <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more orders
-      </Link> */}
     </React.Fragment>
   );
 }
